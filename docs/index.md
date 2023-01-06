@@ -56,7 +56,7 @@ MemVerge服务需要对部分阿里云资源进行访问和创建操作，若您
 
 
 
-授予弹性高性能集群（EHPC）访问权限 
+授予弹性高性能集群（EHPC）权限 
 ----------------------------------------
 
 部署服务实例前，请使用阿里云主账号登录弹性高性能集群（EHPC）的[云资源访问授权](https://ram.console.aliyun.com/role/authorize?request=%7B%22ReturnUrl%22%3A%22https%3A%2F%2Fehpc.console.aliyun.com%22%2C%22Services%22%3A%5B%7B%22Roles%22%3A%5B%7B%22RoleName%22%3A%22AliyunEHPCDefaultRole%22%2C%22TemplateId%22%3A%22DefaultRole%22%7D%5D%2C%22Service%22%3A%22EHPC%22%7D%5D%7D)页面，单击 **同意授权** 。授权后，弹性高性能集群（EHPC）将获取对您云资源相应的访问权限。
