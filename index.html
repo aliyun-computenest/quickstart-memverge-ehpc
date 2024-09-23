@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算巢是阿里云开放给企业应用服务商的服务管理平台。服务商能够在计算巢上发布私有化部署服务，为其客户提供云上软件一键部署的能力；同时也支持全托管模式的服务，赋能服务商托管其客户资源。">
+  <title>MemVerge服务计算巢模式部署文档 - Aliyun 计算巢 x Memverge</title>
+
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="css/theme.css">
+  
+
+  
+
+  
+  
+
+  
+    <script src="search/main.js"></script>
+  
+
+  
+
+  <script src="js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="nav-inner">
+        <div class="logo">
+          <img src="./img/logo-2x.png">
+        </div>
+        <div class="nav-list">
+          <ul>
+          
+              <li><a href="#memverge">MemVerge服务计算巢模式部署文档</a></li>
+              
+                  <li><a href="#_1">概述</a></li>
+                  
+              
+                  <li><a href="#_2">使用说明</a></li>
+                  
+              
+                  <li><a href="#ram">RAM账号所需权限</a></li>
+                  
+              
+                  <li><a href="#ehpc">授予弹性高性能集群（EHPC）权限</a></li>
+                  
+              
+                  <li><a href="#memverge_1">MemVerge服务实例部署流程</a></li>
+                  
+              
+                  <li><a href="#memverge-memory-machine">验证MemVerge Memory Machine</a></li>
+                  
+              
+                  <li><a href="#memverge-memory-machine_1">使用MemVerge Memory Machine</a></li>
+                  
+              
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content theme-github">
+      
+      <div class="content-inner">        
+        
+        <h1 id="memverge">MemVerge服务计算巢模式部署文档</h1>
+<blockquote>
+<p><strong>免责声明：</strong>本文档可能包含第三方产品信息，该信息仅供参考。阿里云对第三方产品的性能、可靠性和操作可能带来的潜在影响，不做任何暗示或其他形式的承诺。</p>
+</blockquote>
+<h2 id="_1">概述</h2>
+<p>MemVerge Memory Machine是全球第一个大内存软件。它可以将DRAM和PMEM进行虚拟化，实现无需更改代码即可访问新的PMEM内存介质，以提供实时分析和AI/ML应用程序所需的大规模内存容量。同时提供了业内第一个企业级的内存数据服务，实现对高可用内存的企业级数据服务，支持宕机恢复的快照和复制功能。本文介绍部署MemVerge服务实例的详细信息。
+<a href="https://cloud.video.taobao.com/play/u/null/p/1/e/6/t/1/d/ud/368971096225.mp4">视频地址</a></p>
+<h2 id="_2">使用说明</h2>
+<p>本文介绍了部署MemVerge服务实例的整体流程。</p>
+<ol>
+<li>登录阿里云账号，若您是通过RAM账号登录，请检查RAM账号权限。</li>
+</ol>
+<p>若缺少权限请登录主账号或者有RAM管理权限的账号添加。详细操作，请参见<a href="#section-zgw-x4d-s6i">RAM账号所需权限</a>。</p>
+<ol>
+<li>一键为EHPC产品授予访问您云资源的权限。</li>
+</ol>
+<p>为EHPC产品授权的详细操作，请参见<a href="#section-bcr-1jv-xb3">授予弹性高性能集群（EHPC）访问权限</a>。</p>
+<ol>
+<li>进入计算巢控制台，在推荐服务中找到Memory Machine-ehpc版，点击创建服务实例进入部署页面，或者从服务商处获取部署链接进入部署页面，填写相应参数。</li>
+</ol>
+<p>填写服务实例详细参数的具体信息，请参见<a href="#section-hte-9yk-wts">MemVerge服务实例部署流程</a>。</p>
+<ol>
+<li>资源部署完成后，您可以通过公网IP访问应用GUI，并通过命令行检查计算节点服务是否正常启动。</li>
+</ol>
+<p>测试MemVerge Memory Machine的详细操作，请参见<a href="#section-zol-7dh-vtx">验证MemVerge Memory Machine</a>。</p>
+<ol>
+<li>联系服务商获取并激活许可证，激活后登录软件进行使用。</li>
+</ol>
+<p>使用MemVerge Memory Machine的详细信息，请参见<a href="#section-aje-62u-9c0">使用MemVerge Memory Machine</a>。</p>
+<p>上述流程的图示如下。
+<img alt="流程图" src="images/p460167.png" /></p>
+<h2 id="ram">RAM账号所需权限</h2>
+<p>MemVerge服务需要对部分阿里云资源进行访问和创建操作，若您使用RAM账号创建服务实例，则需要在创建服务实例前，确认该RAM账号是否包含下表中的权限。查看RAM用户权限的详细操作，请参见<a href="https://help.aliyun.com/document_detail/145198.html">查看RAM用户的权限</a>。</p>
+<p>若缺少权限，请登录阿里云主账号或者有RAM管理权限的账号添加权限后，再部署服务实例。添加RAM权限的详细操作，请参见<a href="https://help.aliyun.com/document_detail/116146.html">为RAM用户授权</a>。</p>
+<table>
+<thead>
+<tr>
+<th>权限策略名称</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AliyunNASFullAccess</td>
+<td>管理文件存储服务（NAS）的权限</td>
+</tr>
+<tr>
+<td>AliyunECSFullAccess</td>
+<td>管理云服务器服务（ECS）的权限</td>
+</tr>
+<tr>
+<td>AliyunVPCFullAccess</td>
+<td>管理专有网络（VPC）的权限</td>
+</tr>
+<tr>
+<td>AliyunEHPCFullAccess</td>
+<td>管理弹性高性能计算（EHPC）的权限</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ehpc">授予弹性高性能集群（EHPC）权限</h2>
+<p>部署服务实例前，请使用阿里云主账号登录弹性高性能集群（EHPC）的<a href="https://ram.console.aliyun.com/role/authorize?request=%7B%22ReturnUrl%22%3A%22https%3A%2F%2Fehpc.console.aliyun.com%22%2C%22Services%22%3A%5B%7B%22Roles%22%3A%5B%7B%22RoleName%22%3A%22AliyunEHPCDefaultRole%22%2C%22TemplateId%22%3A%22DefaultRole%22%7D%5D%2C%22Service%22%3A%22EHPC%22%7D%5D%7D">云资源访问授权</a>页面，单击 <strong>同意授权</strong> 。授权后，弹性高性能集群（EHPC）将获取对您云资源相应的访问权限。</p>
+<p>若您未授予访问权限，创建弹性高性能集群（EHPC）时，会报无权限的错误导致服务实例部署失败。
+<img alt="授权" src="images/p456666.png" /></p>
+<h2 id="memverge_1">MemVerge服务实例部署流程</h2>
+<p><strong>部署步骤</strong></p>
+<ol>
+<li>
+<p>登录<a href="https://computenest.console.aliyun.com/user/cn-hangzhou/recommendService">计算巢控制台</a>，在 <strong>推荐服务</strong> 页，找到 <strong>Memory Machine-ehpc版</strong> 服务。</p>
+</li>
+<li>
+<p>单击 <strong>创建服务实例</strong> 或者直接从服务商处获取部署链接。进入服务实例部署页面。按照流程指引填写相关参数，完成服务实例部署。</p>
+</li>
+</ol>
+<p>服务实例部署完成后，服务器资源和软件一起生成。</p>
+<p><strong>部署参数说明</strong></p>
+<p>您在创建服务实例的过程中，需要配置服务实例信息，下表介绍MemVerge服务实例部署需要配置的详细参数及注意事项。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>默认值</th>
+<th>可选值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地域</td>
+<td>String</td>
+<td>是</td>
+<td>华东1（杭州）</td>
+<td>华北2（北京）、华北3（张家口）、华东1（杭州）、华东2（上海）</td>
+<td>资源所在的区域，目前只支持带有re6p系列机型的地域。</td>
+</tr>
+<tr>
+<td>集群名称</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>无</td>
+<td>EHPC集群的名称。长度为2-64个字符。</td>
+</tr>
+<tr>
+<td>集群登录密码</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>无</td>
+<td>集群的访问密码。长度为8-30个字符，且必须包含三项（大写字母、小写字母、数字、 ()`\~!@#$%\^\&amp;*_-+=|{}[]:;'\&lt;&gt;,.?/ 中的特殊符号）。</td>
+</tr>
+<tr>
+<td>Ehpc部署模式</td>
+<td>String</td>
+<td>是</td>
+<td>Tiny</td>
+<td>Tiny Sample Standard</td>
+<td>Ehpc部署模式包含三种模式。其中 <strong>Tiny</strong> 模式下，计算节点配置中包含登录节点和计算节点的信息，需要单独配置一个管控节点。 其他模式下有专用登录节点、计算节点和管控节点。</td>
+</tr>
+<tr>
+<td>计算节点实例类型</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>ecs.re6p.large ecs.re6p.xlarge ecs.re6p.2xlarge ecs.re6p.4xlarge ecs.re6p.13xlarge</td>
+<td>仅支持持久内存型re6p系列的实例，推荐配置为ecs.re6p.xlarge。</td>
+</tr>
+<tr>
+<td>计算节点数量</td>
+<td>Number</td>
+<td>是</td>
+<td>1</td>
+<td>1-99</td>
+<td>计算节点的实例数量。 * 部署模式为Tiny模式时，推荐配置1台ECS计算节点。  * 部署模式为simple模式时，推荐配置2台ECS计算节点。  * 部署模式为standard模式时，推荐配置3台ECS计算节点。</td>
+</tr>
+<tr>
+<td>登录节点实例类型</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>所有ECS可用实例类型</td>
+<td>登录节点的实例类型，通常对机器配置要求较低，选择满足需求即可。 部署模式为Tiny模式时，无此选项。</td>
+</tr>
+<tr>
+<td>登录节点数量</td>
+<td>Number</td>
+<td>是</td>
+<td>1</td>
+<td>1-8</td>
+<td>登录节点的实例数量。 部署模式为Tiny模式时，无此选项。</td>
+</tr>
+<tr>
+<td>管控节点实例类型</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>所有ECS可用实例类型</td>
+<td>管控节点的实例类型。</td>
+</tr>
+<tr>
+<td>管控节点数量</td>
+<td>Number</td>
+<td>是</td>
+<td>1</td>
+<td>1-8</td>
+<td>管控节点的实例类型。</td>
+</tr>
+<tr>
+<td>系统盘类型</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>ESSD云盘 高效云盘 SSD盘</td>
+<td>选择系统盘的类型。</td>
+</tr>
+<tr>
+<td>系统盘大小</td>
+<td>Number</td>
+<td>是</td>
+<td>40 GB</td>
+<td>无</td>
+<td>选择系统盘的大小，单位为GB。</td>
+</tr>
+<tr>
+<td>OSTag</td>
+<td>String</td>
+<td>是</td>
+<td>CentOS_7.6_64</td>
+<td>CentOS_7.6_64 CentOS_7.9_64</td>
+<td>自定义镜像。</td>
+</tr>
+<tr>
+<td>调度器类型</td>
+<td>String</td>
+<td>是</td>
+<td>Pbs</td>
+<td>Pbs slurm</td>
+<td>调度器类型，当前仅支持pbs和slurm两种类型。</td>
+</tr>
+<tr>
+<td>域账户服务类型</td>
+<td>String</td>
+<td>是</td>
+<td>Nis</td>
+<td>Nis ldap</td>
+<td>域账户服务类型， 当前仅支持nis和ldap两种类型。</td>
+</tr>
+<tr>
+<td>可用区</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>无</td>
+<td>选择新建ECS实例的可用区。</td>
+</tr>
+<tr>
+<td>交换机ID</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>无</td>
+<td>选择现有网络交换机的实例ID。</td>
+</tr>
+<tr>
+<td>付费类型</td>
+<td>String</td>
+<td>是</td>
+<td>按量付费</td>
+<td>按量服务 预付费（包年包月）</td>
+<td>选择服务实例的付费类型。</td>
+</tr>
+<tr>
+<td>文件系统类型</td>
+<td>String</td>
+<td>是</td>
+<td>standard</td>
+<td>standard extreme</td>
+<td>选择NAS文件系统。</td>
+</tr>
+<tr>
+<td>文件系统协议类型</td>
+<td>String</td>
+<td>是</td>
+<td>nfs</td>
+<td>nfs nfs3 nfs4</td>
+<td>选择文件系统协议的类型。</td>
+</tr>
+<tr>
+<td>文件系统ID</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>无</td>
+<td>选择NAS实例ID。</td>
+</tr>
+<tr>
+<td>挂载点</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>无</td>
+<td>选择NAS挂载点。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="memverge-memory-machine">验证MemVerge Memory Machine</h2>
+<p>服务实例部署完成后，MemVerge Memory Machine也会自动完成安装部署。您需要测试Memory Machine服务的GUI和计算节点是否正常启动。测试方法如下：</p>
+<ol>
+<li><strong>测试GUI是否正常启动</strong></li>
+</ol>
+<p>您可以使用如下两种方式中的任一一种进行测试。
+   * 登录<a href="https://ehpc.console.aliyun.com/#/cluster?regionId=cn-shenzhen">阿里云弹性高性能计算控制台</a>，找到MemVerge部署集群的公网IP地址，通过http://公网IP:8081链接访问8081端口，若能正常启动GUI登录页面，则表示GUI已经正常启动；若未正常启动，则可以通过support@memverge.com联系MemVerge服务商，寻找技术支持。<img alt="方法一" src="images/p459352.png" /></p>
+<ul>
+<li>
+<p>在计算巢控制台，找到部署的服务实例，进入服务实例详情页，单击 <strong>VisitUrl</strong> 后的IP地址，打开Memory Machine Management Center界面。若能正常启动GUI登录页面，则表示GUI已经正常启动；若未正常启动，则可以通过support@memverge.com联系MemVerge服务商，寻找技术支持。<img alt="方法二" src="../images/p459353.png" /></p>
+</li>
+<li>
+<p><strong>测试计算节点服务是否正常启动</strong></p>
+</li>
+<li>
+<p>登录<a href="https://ehpc.console.aliyun.com/#/cluster?regionId=cn-shenzhen">阿里云弹性高性能计算控制台</a>，单击 <strong>集群</strong> 页右上方的 <strong>远程连接</strong> 。<img alt="远程连接" src="images/p459355.png" /></p>
+</li>
+<li>
+<p>在弹出的 <strong>远程连接</strong> 弹框中，输入 <strong>集群用户名</strong> 、 <strong>登录密码</strong> 和 <strong>端口</strong> 信息后单击 <strong>SSH连接</strong> ，进入命令行工具mvmcli。</p>
+<p>集群用户名为root，登录密码为部署过程中设置的集群密码，端口默认填写22。
+  <img alt="远程连接" src="images/p459540.png" /></p>
+</li>
+<li>
+<p>在阿里云弹性高性能控制台左侧导航栏，选择 <strong>资源管理</strong> &gt; <strong>节点与队列</strong> 。</p>
+</li>
+<li>
+<p>在 <strong>集群</strong> 框中，选择您创建的集群名称，在 <strong>节点类型</strong> 框中，选择计算节点。</p>
+</li>
+<li>
+<p>在 <strong>节点列表</strong> 中，获取节点的IP地址，在命令行工具中运行ssh root@私网 IP，登录计算节点。<img alt="获取私有IP地址" src="images/p459855.png" /></p>
+</li>
+<li>
+<p>登录计算节点后，先输入<code>/usr/local/share/memverge/sbin/mvmcli show-usage</code>命令，执行后，再输入<code>systemctl status mvmallocd</code>命令。查看执行结果。</p>
+<p>执行结果如下图所示，表示服务正常启动。<img alt="回显结果" src="images/p459457.png" /></p>
+<p>若Pmem显示为0，或者出现下图所示结果时，表示服务未成功启动。请通过support@memverge.com联系MemVerge服务商，寻找技术支持。
+  <img alt="错误回显" src="images/p459463.png" /></p>
+</li>
+</ul>
+<h2 id="memverge-memory-machine_1">使用MemVerge Memory Machine</h2>
+<p>测试通过后，您可以通过support@memverge.com邮箱或访问<a href="https://market.aliyun.com/store/4925597.html#/">MemVerge</a>联系MemVerge服务商。服务商的售前工程师会收集您的机器信息，协助您登录并激活Memory Machine Management Center的License。</p>
+<p>激活Memory Machine Management Center后，您就可以登录查看资源情况和使用软件。
+<img alt="查看资源" src="images/p459523.png" /></p>
+        
+      </div>
+
+      <div class="copyrights">© 2009-2022 Aliyun.com 版权所有</div>
+    </div>
+  </div>
+  
+  <!--
+  MkDocs version      : 1.6.1
+  Docs Build Date UTC : 2024-09-23 07:28:53.781596+00:00
+  -->
+</body>
+</html>
